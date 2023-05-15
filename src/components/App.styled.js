@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 export const TitleApp = styled.h1`
   font-size: 40px;
   color: #4343b0;
-  margin: 0;
-  margin-bottom: 45px;
+  margin: 20px 0;
+  text-align: center;
 `;
 
 export const TitleContactList = styled.h2`

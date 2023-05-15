@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 
-export const Layout = styled.div`
+export const LayoutStyled = styled.div`
   background-color: #2d94ee33;
   padding: 50px 30px;
   margin: 70px auto;
   max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   font-size: 40;
   color: #010101;
   border-radius: 50px;
