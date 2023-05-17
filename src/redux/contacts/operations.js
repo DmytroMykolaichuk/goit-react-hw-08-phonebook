@@ -2,16 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Notiflix from 'notiflix';
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
-
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
-
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
@@ -41,11 +31,11 @@ export const addContact = createAsyncThunk(
     if (
       contacts.find(
         contact =>
-          contact.phone.toLowerCase() === newContact.phone.toLowerCase()
+          contact.number.toLowerCase() === newContact.number.toLowerCase()
       )
     ) {
       Notiflix.Notify.failure(
-        `${newContact.phone} this number is already in your phonebook`,
+        `${newContact.number} this number is already in your phonebook`,
         {
           timeout: 3000,
         }
@@ -54,6 +44,7 @@ export const addContact = createAsyncThunk(
     }
     try {
       const response = await axios.post('/contacts', newContact);
+
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -73,16 +64,15 @@ export const deleteContact = createAsyncThunk(
   }
 );
 
-export const register = createAsyncThunk(
-  'auth/register',
-  async (credentials, thunkAPI) => {
-    try {
-      const res = await axios.post('/users/signup', credentials);
-      setAuthHeader(res.data.token);
-      console.log(res);
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const editContact = createAsyncThunk(
+//   'contacts/editContact',
+//   async (contactId, thunkAPI) => {
+//     try {
+//       const response = await axios.patch(`/contacts/${contactId}`);
+//       console.log(response.data);
+//       return response.data;
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue(e.message);
+//     }
+//   }
+// );

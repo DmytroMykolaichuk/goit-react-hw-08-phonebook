@@ -9,7 +9,8 @@ export const Form = styled(AddContactForm)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  margin: 10px auto;
+  gap: 12px;
   max-width: 332px;
 `;
 

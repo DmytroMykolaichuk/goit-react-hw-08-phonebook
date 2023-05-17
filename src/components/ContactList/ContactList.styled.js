@@ -20,7 +20,7 @@ export const Contact = styled.p`
   padding: 0 10px;
 `;
 
-export const DeleteBtn = styled.button`
+export const Button = styled.button`
   font-size: 20px;
   padding: 0px 10px;
   border: 1px solid black;
@@ -31,4 +31,8 @@ export const DeleteBtn = styled.button`
     background-color: #4343b0;
     color: white;
   }
+`;
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 8px;
 `;

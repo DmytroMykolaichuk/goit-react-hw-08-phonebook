@@ -8,7 +8,7 @@ import {
   ErrorMessage,
 } from './ContactForm.styled';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/contacts/operations';
 
 const ContactSchema = Yup.object().shape({
   name: Yup.string()
@@ -29,7 +29,7 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = ({ name, number }, actions) => {
-    const newContact = { name, phone: number };
+    const newContact = { name, number };
     dispatch(addContact(newContact));
     actions.resetForm();
   };

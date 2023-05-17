@@ -10,9 +10,10 @@ export const TitleApp = styled.h1`
 export const TitleContactList = styled.h2`
   font-size: 34px;
   color: #4343b0;
-  margin-top: 25px;
+  text-align: center;
 `;
 export const Notification = styled.p`
+  text-align: center;
   font-size: 28px;
   color: #4343b0;
   margin-top: 25px;
@@ -21,4 +22,5 @@ export const TextErrorPage = styled.p`
   color: #cd0000;
   font-weight: 700;
   font-size: 34px;
+  text-align: center;
 `;

@@ -1,21 +1,23 @@
-import { LayoutStyled } from './Layout.styled';
+import { LayoutStyled, PhonebookApp } from './Layout.styled';
 import { GlobalStyle } from 'components/GlobalStyle.styled';
 import { TitleApp } from 'components/App.styled';
 import { Outlet } from 'react-router-dom';
-import { AuthMenu } from 'components/AuthMenu/AuthMenu';
+import { AppBar } from 'components/AppBar/AppBar';
 
 export const Layout = () => {
   return (
     <LayoutStyled>
       <GlobalStyle />
-      <header>
-        <AuthMenu />
-      </header>
+      <PhonebookApp>
+        <header>
+          <AppBar />
+        </header>
 
-      <main>
-        <TitleApp>Phonebook</TitleApp>
-        <Outlet />
-      </main>
+        <main>
+          <TitleApp>Phonebook</TitleApp>
+          <Outlet />
+        </main>
+      </PhonebookApp>
     </LayoutStyled>
   );
 };

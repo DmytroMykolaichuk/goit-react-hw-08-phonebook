@@ -3,30 +3,44 @@ import {
   ListContacts,
   ItemsContact,
   Contact,
-  DeleteBtn,
+  Button,
+  ButtonContainer,
 } from './ContactList.styled';
-import { deleteContact } from 'redux/operations';
-import { visibleContact, getIsLoading } from 'redux/selectors';
+import { deleteContact, editContact } from 'redux/contacts/operations';
+import { visibleContact, getIsLoading } from 'redux/contacts/selectors';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const getFilteredContacts = useSelector(visibleContact);
 
+  function handlerEditContact() {
+    console.log(5);
+  }
+
   return (
     <ListContacts>
       {getFilteredContacts.map(contact => (
         <ItemsContact key={contact.id}>
           <Contact>
-            {contact.name}: {contact.phone}
+            {contact.name}: {contact.number}
           </Contact>
-          <DeleteBtn
-            disabled={isLoading}
-            type="button"
-            onClick={() => dispatch(deleteContact(contact.id))}
-          >
-            Delete
-          </DeleteBtn>
+          <ButtonContainer>
+            <Button
+              disabled={isLoading}
+              type="button"
+              onClick={handlerEditContact}
+            >
+              Edit
+            </Button>
+            <Button
+              disabled={isLoading}
+              type="button"
+              onClick={() => dispatch(deleteContact(contact.id))}
+            >
+              Delete
+            </Button>
+          </ButtonContainer>
         </ItemsContact>
       ))}
     </ListContacts>
