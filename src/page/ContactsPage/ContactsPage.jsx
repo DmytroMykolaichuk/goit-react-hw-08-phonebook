@@ -16,8 +16,14 @@ import {
   Notification,
   TextErrorPage,
 } from 'components/App.styled';
+import { useState } from 'react';
+import { EditModal } from 'components/EditModal/EditModal';
 
 export function ContactsPage() {
+  const [isModal, setIsModal] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [idUser, setIdUser] = useState('');
+  const [userNamber, setUserNamber] = useState('');
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
@@ -27,6 +33,17 @@ export function ContactsPage() {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
+
+  const isOpenModal = (name, number, id) => {
+    setIsModal(true);
+    setUserName(name);
+    setUserNamber(number);
+    setIdUser(id);
+  };
+
+  const isCloseModal = () => {
+    setIsModal(false);
+  };
 
   return (
     <>
@@ -44,11 +61,19 @@ export function ContactsPage() {
           {getFilteredContacts.length === 0 && !isLoading && (
             <Notification>You have no contact with this name</Notification>
           )}
-          <ContactList />
+          <ContactList isOpenModal={isOpenModal} />
         </div>
       )}
 
       {error && <TextErrorPage>Oops...try again</TextErrorPage>}
+      {isModal && (
+        <EditModal
+          name={userName}
+          number={userNamber}
+          idUser={idUser}
+          isCloseModal={isCloseModal}
+        />
+      )}
     </>
   );
 }

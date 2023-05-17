@@ -3,7 +3,7 @@ import {
   fetchContacts,
   addContact,
   deleteContact,
-  // editContact,
+  editContact,
 } from '../contacts/operations';
 
 const contactsSlice = createSlice({
@@ -53,14 +53,14 @@ const contactsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    // [editContact.fulfilled](state, action) {
-    //   state.isLoading = false;
-    //   state.error = null;
-    //   const index = state.items.findIndex(
-    //     contact => contact.id === action.payload.id
-    //   );
-    //   state.items.splice(index, 1);
-    // },
+    [editContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const index = state.items.findIndex(
+        contact => contact.id === action.payload.id
+      );
+      state.items.splice(index, 1, action.payload);
+    },
   },
 });
 

@@ -6,17 +6,13 @@ import {
   Button,
   ButtonContainer,
 } from './ContactList.styled';
-import { deleteContact, editContact } from 'redux/contacts/operations';
+import { deleteContact } from 'redux/contacts/operations';
 import { visibleContact, getIsLoading } from 'redux/contacts/selectors';
 
-export const ContactList = () => {
+export const ContactList = ({ isOpenModal }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const getFilteredContacts = useSelector(visibleContact);
-
-  function handlerEditContact() {
-    console.log(5);
-  }
 
   return (
     <ListContacts>
@@ -29,7 +25,9 @@ export const ContactList = () => {
             <Button
               disabled={isLoading}
               type="button"
-              onClick={handlerEditContact}
+              onClick={() =>
+                isOpenModal(contact.name, contact.number, contact.id)
+              }
             >
               Edit
             </Button>

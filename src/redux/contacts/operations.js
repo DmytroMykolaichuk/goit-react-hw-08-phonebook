@@ -64,15 +64,17 @@ export const deleteContact = createAsyncThunk(
   }
 );
 
-// export const editContact = createAsyncThunk(
-//   'contacts/editContact',
-//   async (contactId, thunkAPI) => {
-//     try {
-//       const response = await axios.patch(`/contacts/${contactId}`);
-//       console.log(response.data);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
+export const editContact = createAsyncThunk(
+  'contacts/editContact',
+  async ({ userName, userNumber, idUser }, thunkAPI) => {
+    try {
+      const response = await axios.patch(`/contacts/${idUser}`, {
+        name: userName,
+        number: userNumber,
+      });
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
