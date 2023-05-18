@@ -67,6 +67,30 @@ export const deleteContact = createAsyncThunk(
 export const editContact = createAsyncThunk(
   'contacts/editContact',
   async ({ userName, userNumber, idUser }, thunkAPI) => {
+    const contacts = thunkAPI.getState().contacts.items;
+    if (userName.trim().length === 0) {
+      Notiflix.Notify.failure(`Name cannot be empty`, {
+        timeout: 3000,
+      });
+      return thunkAPI.abort();
+    }
+    if (userNumber.trim().length === 0) {
+      Notiflix.Notify.failure(`Number cannot be empty`, {
+        timeout: 3000,
+      });
+      return thunkAPI.abort();
+    }
+    if (
+      contacts.find(
+        el =>
+          el.id !== idUser && (el.name === userName || el.number === userNumber)
+      )
+    ) {
+      Notiflix.Notify.failure(`This contact already exists.`, {
+        timeout: 3000,
+      });
+      return thunkAPI.abort();
+    }
     try {
       const response = await axios.patch(`/contacts/${idUser}`, {
         name: userName,
