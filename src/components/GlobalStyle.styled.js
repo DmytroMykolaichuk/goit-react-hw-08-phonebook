@@ -21,7 +21,6 @@ ol {
   list-style: none;
 }
 button {
-  // border:none;
   padding: 0;
   cursor: pointer;
 }
